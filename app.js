@@ -1,11 +1,13 @@
-const SIZE_BOARD = 8
-const PROBABILITY_NUMBER_TWO = 97 // unit (%)
+const PROBABILITY_NUMBER_TWO = 80 // unit (%)
 
+let sizeBoard
 let dataBoard
 let board
 let btnStart
 let btnTest
 let isGameStart
+let score
+let range
 
 $(document).ready(() => {
   init()
@@ -13,6 +15,7 @@ $(document).ready(() => {
 
   handlerBtnStartClick()
   handlerPress()
+  handlerRangeChange()
 
   handlerBtnStartTest()
 })
@@ -21,8 +24,13 @@ const init = () => {
   board = $('#board')
   btnStart = $('#btnStart')
   btnTest = $('#btnTest')
+  range = $('#range')
 
   isGameStart = false
+  sizeBoard = 4
+  score = 0
+
+  $('#size').html(sizeBoard)
 
   setEmptyBoardData()
 }
@@ -30,9 +38,9 @@ const init = () => {
 const setEmptyBoardData = () => {
   dataBoard = []
 
-  for (let i = 0; i < SIZE_BOARD; i++) {
+  for (let i = 0; i < sizeBoard; i++) {
     dataBoard[i] = []
-    for (let j = 0; j < SIZE_BOARD; j++) {
+    for (let j = 0; j < sizeBoard; j++) {
       dataBoard[i][j] = {
         x: i, y: j, value: undefined,
       }
@@ -43,11 +51,11 @@ const setEmptyBoardData = () => {
 const renderBoard = () => {
   $('.board-item').remove()
 
-  board.css('grid-template-columns', `repeat(${SIZE_BOARD}, 60px)`)
-  board.css('grid-template-rows', `repeat(${SIZE_BOARD}, 60px)`)
+  board.css('grid-template-columns', `repeat(${sizeBoard}, 60px)`)
+  board.css('grid-template-rows', `repeat(${sizeBoard}, 60px)`)
 
-  for (let i = 0; i < SIZE_BOARD; i++) {
-    for (let j = 0; j < SIZE_BOARD; j++) {
+  for (let i = 0; i < sizeBoard; i++) {
+    for (let j = 0; j < sizeBoard; j++) {
       const dataCell = dataBoard[i][j]
       let cell = $('<div>')
         .addClass('board-item')
@@ -57,11 +65,14 @@ const renderBoard = () => {
       board.append(cell)
     }
   }
+
+  $('#score-value').html(score)
 }
 
 const handlerBtnStartClick = () => {
   btnStart.click(() => {
     isGameStart = true
+    score = 0
 
     setEmptyBoardData()
 
@@ -215,6 +226,13 @@ const handlerPressRight = () => {
   }
 }
 
+const handlerRangeChange = () => {
+  range.change(() => {
+    sizeBoard = range.val()
+    $('#size').html(sizeBoard)
+  })
+}
+
 const randomCell = (dataCells) => {
   const arrayTempCell = []
   dataCells.forEach((row) => {
@@ -264,6 +282,7 @@ const groupValue = (arrayValue) => {
         pointer++
       } else if (data[pointer].value === data[index].value) {
         data[index].value += data[pointer].value
+        score += data[pointer].value * 2
         data[pointer].value = undefined
         isChange = true
         index++
@@ -290,9 +309,9 @@ const redirectConvert = (data) => {
 
   const newArray = []
 
-  for (let i = 0; i < SIZE_BOARD; i++) {
+  for (let i = 0; i < sizeBoard; i++) {
     const temp = []
-    for (let j = 0; j < SIZE_BOARD; j++) {
+    for (let j = 0; j < sizeBoard; j++) {
       temp.push(data[j][i])
     }
     newArray.push(temp)
