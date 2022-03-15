@@ -1,0 +1,92 @@
+.main {
+    width           : 100vw;
+    height          : 100vh;
+
+    display         : flex;
+    flex-direction  : column;
+    justify-content : center;
+    align-items     : center;
+}
+
+#board {
+    padding          : 50px;
+
+    border           : 3px solid #e7e7e7;
+    border-radius    : 10px;
+
+    background-color : rgba(250, 250, 250, 0.55);
+
+    display          : grid;
+    grid-gap         : 15px;
+}
+
+.control {
+    margin-top : 20px;
+}
+
+.board-item {
+    width           : 60px;
+    height          : 60px;
+
+    border-radius   : 10px;
+    box-shadow      : 0 0 5px rgba(199, 199, 199, 0.5);
+
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+
+    font-size       : 14px;
+    font-weight     : bold;
+}
+
+.color-text-black {
+    color : #000;
+}
+
+.color-text-white {
+    color : #fff;
+}
+
+.color-cell-2 {
+    background-color : #e6f6ff;
+}
+
+.color-cell-4 {
+    background-color : #9de4ff;
+}
+
+.color-cell-8 {
+    background-color : #2ebaff;
+}
+
+.color-cell-16 {
+    background-color : #4f5eff;
+}
+
+.color-cell-32 {
+    background-color : #9e4fff;
+}
+
+.color-cell-64 {
+    background-color : #ff4fcd;
+}
+
+.color-cell-128 {
+    background-color : #ff4f4f;
+}
+
+.color-cell-256 {
+    background-color : #ff8c2f;
+}
+
+.color-cell-512 {
+    background-color : #fff417;
+}
+
+.color-cell-1024 {
+    background-color : #ddff45;
+}
+
+.color-cell-2048 {
+    background-color : #45ff30;
+}
